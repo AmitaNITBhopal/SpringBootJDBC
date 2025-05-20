@@ -21,12 +21,10 @@ public class BookDtlsDAOImpl implements BookDtlsDAO {
 	@Override
 	public List<BookDtls> Get(int id) { 
 		String str = "select * from BookDtls where id=?"; 
-		ArrayList arr = new ArrayList<Integer>();
-		arr.add(id);
 		
 		BookDtlsMapper bookDtlsMapper = new BookDtlsMapper();
 		
-		List<BookDtls> list = (List<BookDtls>) jdbctemplate.query(str, arr.toArray(), bookDtlsMapper);
+		List<BookDtls> list = (List<BookDtls>) jdbctemplate.query(str, bookDtlsMapper, id);
 		return list;
 	  }
 	 
@@ -35,6 +33,12 @@ public class BookDtlsDAOImpl implements BookDtlsDAO {
 	public int create(String title, int status) { 
 		String str = "Insert into BookDtls (title, status) values (?,?)"; 
 		int rows = jdbctemplate.update(str, title, status); 
+		return rows;
+	}
+	
+	public int updateTitle(String title, int id) {
+		String str = "update BookDtls set title = ? where id = ?"; 
+		int rows = jdbctemplate.update(str, title, id); 
 		return rows;
 	}
 }
