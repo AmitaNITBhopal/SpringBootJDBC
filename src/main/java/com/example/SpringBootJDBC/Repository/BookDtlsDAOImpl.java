@@ -20,6 +20,7 @@ public class BookDtlsDAOImpl implements BookDtlsDAO {
 	 	
 	@Override
 	public List<BookDtls> Get(int id) { 
+		System.out.println("inside Get");
 		String str = "select * from BookDtls where id=?"; 
 		
 		BookDtlsMapper bookDtlsMapper = new BookDtlsMapper();
@@ -31,14 +32,18 @@ public class BookDtlsDAOImpl implements BookDtlsDAO {
 
 	@Override
 	public int create(String title, int status) { 
+		System.out.println("inside create");
 		String str = "Insert into BookDtls (title, status) values (?,?)"; 
 		int rows = jdbctemplate.update(str, title, status); 
+		System.out.println("Rows effected " + rows);
 		return rows;
 	}
 	
 	public int updateTitle(String title, int id) {
+		System.out.println("inside update");
 		String str = "update BookDtls set title = ? where id = ?"; 
 		int rows = jdbctemplate.update(str, title, id); 
+		System.out.println("Rows effected " + rows);
 		return rows;
 	}
 }
