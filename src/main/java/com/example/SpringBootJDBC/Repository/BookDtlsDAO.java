@@ -14,5 +14,5 @@ import com.example.SpringBootJDBC.model.BookDtls;
 public interface BookDtlsDAO {
 	
 	public List<BookDtls> Get(int id);
-	public int create(String title, int status);
+	public int create(String title, boolean status);
 }
